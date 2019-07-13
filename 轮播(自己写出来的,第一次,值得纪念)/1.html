@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html" charset="utf-8">
+    <title>软件4班梅恬轮播图</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            font-size:13px;
+        }
+        .content_box{
+            width:700px;
+            height:500px;
+            overflow:hidden;
+            position:relative;
+            margin:0 auto;
+        }
+        #picBox{
+            width:2000px;
+        }
+        .pics{
+            width:700px;
+            float:left;
+        }
+        .btn{
+            position:absolute;
+            top:120px;
+            cursor:pointer;
+            display:none;
+
+        }
+        .btn img{
+            width:40px;
+            margin-top: 100px;
+        }
+        footer{
+            margin-top: 50px;
+        }
+        footer h3{
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+<div class="content_box">
+    <div id="picBox">
+        <img class="pics" src="img/han2.jpg" alt=""/>
+        <img class="pics" src="img/han3.jpg" alt=""/>
+        <img class="pics" src="img/han4.jpg" alt=""/>
+        <img class="pics" src="img/han5.jpg" alt=""/>
+        <img class="pics" src="img/han7.jpg" />
+        <div class="btn" style="left:0;">
+            <img src="img/prev.png" alt=""/>
+        </div>
+        <div class="btn" style="right:0;">
+            <img src="img/next.png" alt=""/>
+        </div>
+    </div>
+</div>
+<footer>
+    <h3>2019.6.27</h3>
+    <h3>软件4班梅恬</h3>
+</footer>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+    var timer;
+    $('#picBox').hover(function(){
+        clearInterval(timer);
+        $('.btn').stop(false,true).fadeIn(400);
+    },function(){
+        $('.btn').stop(false,true).fadeOut(400);
+        timer=setInterval(function(){
+            $('.pics:first').stop(false,true).animate({marginLeft:'-700px'},500,function(){
+                $('.pics:first').appendTo($('#picBox')).css({marginLeft:'0px'});
+            });
+        },1000);
+    }).trigger('mouseleave');
+
+    $('.btn').eq(0).on('click',function(){
+        if(!$('.pics:first').is(':animated')){
+            $('.pics:first').stop(false,true).animate({marginLeft:'-700px'},500,function(){
+                $('.pics:first').appendTo($('#picBox')).css({marginLeft:'0px'});
+            });
+        }
+    });
+    $('.btn').eq(1).on('click',function(){
+        if(!$('.pics:first').is(':animated')){
+            $('.pics:last').prependTo($('#picBox')).css({marginLeft:'-700px'});
+            $('.pics:first').animate({marginLeft:'0px'},500);
+        }
+    });
+</script>
+</html>
